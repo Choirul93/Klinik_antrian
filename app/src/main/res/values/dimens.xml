@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin_edit_text">16dp</dimen>
+    <dimen name="padding_rounded">5dp</dimen>
+    <dimen name="bg_rounded_radius">50dp</dimen>
+    <dimen name="bg_rounded_radius_small">25dp</dimen>
+    <dimen name="pedding_left_rounded">20dp</dimen>
+    <dimen name="card_elevation">5dp</dimen>
+    <dimen name="dimen_20">20dp</dimen>
+    <dimen name="dimen_10">20dp</dimen>
+    <dimen name="card_radius">30dp</dimen>
+
+</resources>

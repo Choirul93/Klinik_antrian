@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1017280547876",
+    "firebase_url": "https://klinik-65521.firebaseio.com",
+    "project_id": "klinik-65521",
+    "storage_bucket": "klinik-65521.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1017280547876:android:1b432128927f95e42ddcb1",
+        "android_client_info": {
+          "package_name": "com.skripsi.klinik"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1017280547876-qv1nunv956md6sm9dor35cpqjq1v8oe5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.skripsi.klinik",
+            "certificate_hash": "22452d576359ed6313540d09ec79004f5b36f85b"
+          }
+        },
+        {
+          "client_id": "1017280547876-q1shi643eao35hpa1836amsr9hr6i6bg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCqJt3-Y5QjGdTSlqeh4RA8KfLqNKvrW1o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1017280547876-q1shi643eao35hpa1836amsr9hr6i6bg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

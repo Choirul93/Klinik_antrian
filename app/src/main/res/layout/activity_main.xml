@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".MainActivity">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="200dp"
+                android:layout_gravity="center_horizontal"
+                android:src="@mipmap/ic_launcher"
+                android:layout_marginTop="50dp"/>
+
+            <EditText
+                android:id="@+id/etNama"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="textPersonName"
+                android:background="@drawable/bg_white_rounded"
+                android:layout_marginTop="@dimen/margin_edit_text"
+                android:hint="nama"
+                android:textColor="@color/textDarkPrimary"
+                android:textColorHint="@color/textDarkDisabled"
+                />
+
+            <EditText
+                android:id="@+id/etPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="phone"
+                android:hint="No hp"
+                android:background="@drawable/bg_white_rounded"
+                android:layout_marginTop="@dimen/margin_edit_text"
+                android:textColor="@color/textDarkPrimary"
+                android:textColorHint="@color/textDarkDisabled"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Daftar"
+                android:textSize="16sp"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="@dimen/margin_edit_text"
+                android:textColor="@color/textDarkPrimary"
+                android:onClick="onDaftar"/>
+
+
+            <ProgressBar
+                android:id="@+id/pbLogin"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
+
+            <Button
+                android:id="@+id/btLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_edit_text"
+                android:background="@drawable/btn_bg_white_rounded"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                android:text="Simpan"
+                android:onClick="onLogin"/>
+
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

@@ -1,0 +1,280 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/background"
+    tools:context=".DaftarActivity">
+
+    <androidx.appcompat.widget.Toolbar
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="@color/colorPrimary"
+        app:contentInsetLeft="0dp"
+        app:contentInsetStart="0dp"
+        app:contentInsetStartWithNavigation="0dp"
+        app:navigationIcon="@drawable/ic_navigate_before_white_24dp"
+        app:title="Daftar"
+        app:titleTextColor="@color/white" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_edit_text"
+                android:layout_marginRight="@dimen/margin_edit_text"
+                android:text="Nama"
+                android:textColor="@color/textDarkSecondary"
+                />
+
+            <EditText
+                android:id="@+id/etNama"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_white_rounded"
+                android:hint="Nama"
+                android:inputType="textPersonName"
+                android:textColor="@color/textDarkPrimary"
+                android:textColorHint="@color/textDarkDisabled"
+                android:focusable="true"
+                >
+                <requestFocus/>
+            </EditText>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_edit_text"
+                android:layout_marginRight="@dimen/margin_edit_text"
+                android:text="Nomor Hp"
+                android:textColor="@color/textDarkSecondary" />
+
+            <EditText
+                android:id="@+id/etPhone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_white_rounded"
+                android:hint="Nomor Hp"
+                android:inputType="phone"
+                android:textColor="@color/textDarkPrimary"
+                android:textColorHint="@color/textDarkDisabled" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_edit_text"
+                android:layout_marginRight="@dimen/margin_edit_text"
+                android:text="Tanggal Lahir"
+                android:textColor="@color/textDarkSecondary" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:background="@drawable/bg_white_rounded"
+                android:orientation="horizontal"
+                android:padding="0dp">
+
+                <EditText
+                    android:id="@+id/etTangalLahir"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.9"
+                    android:background="@drawable/bg_white_rounded"
+                    android:hint="Tanggal Lahir"
+                    android:inputType="datetime"
+                    android:textColor="@color/textDarkPrimary"
+                    android:textColorHint="@color/textDarkDisabled"
+                    android:focusable="false" />
+
+                <ImageView
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_weight="0.1"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/ic_event_note_black_24dp"
+                    android:onClick="onOpenDatePIcker"/>
+
+            </LinearLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_edit_text"
+                android:layout_marginRight="@dimen/margin_edit_text"
+                android:text="Usia"
+                android:textColor="@color/textDarkSecondary" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:background="@drawable/bg_white_rounded"
+                android:orientation="horizontal"
+                android:padding="0dp">
+
+                <EditText
+                    android:id="@+id/etUsia"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.6"
+                    android:background="@drawable/bg_white_rounded"
+                    android:hint="Usia"
+                    android:inputType="number"
+                    android:textColor="@color/textDarkPrimary"
+                    android:textColorHint="@color/textDarkDisabled" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/margin_edit_text"
+                    android:text="Th"
+                    android:textColor="@color/textDarkPrimary">
+
+                </TextView>
+
+            </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/margin_edit_text"
+                android:text="*boleh kosong"
+                android:textColor="@color/textDarkDisabled" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_edit_text"
+                android:layout_marginRight="@dimen/margin_edit_text"
+                android:text="Berat"
+                android:textColor="@color/textDarkSecondary" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:background="@drawable/bg_white_rounded"
+                android:orientation="horizontal"
+                android:padding="0dp">
+
+                <EditText
+                    android:id="@+id/etBerat"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1.6"
+                    android:background="@drawable/bg_white_rounded"
+                    android:hint="Berat"
+                    android:inputType="number"
+                    android:textColor="@color/textDarkPrimary"
+                    android:textColorHint="@color/textDarkDisabled" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="@dimen/margin_edit_text"
+                    android:text="Kg"
+                    android:textColor="@color/textDarkPrimary">
+
+                </TextView>
+
+
+            </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="@dimen/margin_edit_text"
+                android:text="*boleh kosong"
+                android:textColor="@color/textDarkDisabled" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_edit_text"
+                android:layout_marginRight="@dimen/margin_edit_text"
+                android:text="Jenis Kelamin"
+                android:textColor="@color/textDarkSecondary" />
+
+            <RadioGroup
+                android:id="@+id/rgJenisKelamin"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RadioButton
+                    android:id="@+id/rbLaki"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:checked="true"
+                    android:text="Laki-laki"
+                    android:textColor="@color/textDarkPrimary" />
+
+                <RadioButton
+                    android:id="@+id/rbPerempuan"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Perempuan"
+                    android:textColor="@color/textDarkPrimary" />
+            </RadioGroup>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_edit_text"
+                android:layout_marginRight="@dimen/margin_edit_text"
+                android:text="Alamat"
+                android:textColor="@color/textDarkSecondary" />
+            <EditText
+                android:id="@+id/etAlamat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_white_rounded"
+                android:gravity="top|left"
+                android:hint="Alamat"
+                android:inputType="textMultiLine"
+                android:lines="8"
+                android:maxLines="10"
+                android:minLines="6"
+                android:padding="@dimen/margin_edit_text"
+                android:scrollbars="vertical"
+                android:textColor="@color/textDarkPrimary"
+                android:textColorHint="@color/textDarkDisabled" />
+
+            <ProgressBar
+                android:id="@+id/pbDaftar"
+                style="?android:attr/progressBarStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/margin_edit_text"
+                android:visibility="gone" />
+
+            <Button
+                android:id="@+id/button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_edit_text"
+                android:background="@drawable/btn_bg_white_rounded"
+                android:clickable="true"
+                android:focusable="true"
+                android:foreground="?android:attr/selectableItemBackground"
+                android:onClick="onSimpan"
+                android:text="Simpan" />
+
+        </LinearLayout>
+
+    </ScrollView>
+
+
+</RelativeLayout>
