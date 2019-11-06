@@ -4,6 +4,7 @@ public class Antrian {
     private String key;
     private int antrian_sekarang;
     private int jumlah_antrian;
+    private int isOpen;
 
     public Antrian() {
     }
@@ -29,4 +30,11 @@ public class Antrian {
         this.jumlah_antrian = jumlah_antrian;
     }
 
+    public int getIsOpen() {
+        return isOpen;
+    }
+
+    public void setIsOpen(int isOpen) {
+        this.isOpen = isOpen;
+    }
 }

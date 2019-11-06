@@ -25,8 +25,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/toolbar"
-        >
+        android:layout_below="@+id/toolbar">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -36,8 +35,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="130dp"
-                android:background="@drawable/bg_blue_rounded">
-            </ImageView>
+                android:background="@drawable/bg_blue_rounded"></ImageView>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -71,23 +69,25 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:orientation="vertical">
+
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
                                     android:gravity="center"
                                     android:text="Total"
                                     android:textColor="@color/textDarkDisabled"
-                                    android:textSize="16dp"
-                                    android:layout_gravity="center_horizontal"/>
+                                    android:textSize="16dp" />
+
                                 <TextView
                                     android:id="@+id/tvJumlahAntrian"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
                                     android:gravity="center"
-                                    android:text="25"
+                                    android:text=""
                                     android:textColor="@color/textDarkSecondary"
-                                    android:textSize="30dp"
-                                    android:layout_gravity="center_horizontal"/>
+                                    android:textSize="30dp" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -95,25 +95,27 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:orientation="vertical">
+
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
                                     android:layout_weight="1"
                                     android:gravity="center"
                                     android:text="Dipanggil"
                                     android:textColor="@color/textDarkDisabled"
-                                    android:textSize="16dp"
-                                    android:layout_gravity="center_horizontal"/>
+                                    android:textSize="16dp" />
+
                                 <TextView
                                     android:id="@+id/tvAntrian"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
                                     android:layout_weight="1"
                                     android:gravity="center"
-                                    android:text="20"
+                                    android:text=""
                                     android:textColor="@color/textDarkPrimary"
-                                    android:textSize="50dp"
-                                    android:layout_gravity="center_horizontal"/>
+                                    android:textSize="50dp" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -121,25 +123,27 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:orientation="vertical">
+
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
                                     android:layout_weight="1"
                                     android:gravity="center"
                                     android:text="Menunggu"
                                     android:textColor="@color/textDarkDisabled"
-                                    android:textSize="16dp"
-                                    android:layout_gravity="center_horizontal"/>
+                                    android:textSize="16dp" />
+
                                 <TextView
                                     android:id="@+id/tvMenunggu"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
                                     android:layout_weight="1"
                                     android:gravity="center"
-                                    android:text="5"
+                                    android:text=""
                                     android:textColor="@color/textDarkSecondary"
-                                    android:textSize="30sp"
-                                    android:layout_gravity="center_horizontal"/>
+                                    android:textSize="30sp" />
                             </LinearLayout>
                         </LinearLayout>
 
@@ -148,37 +152,38 @@
                             style="?android:attr/progressBarStyle"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:visibility="gone"/>
+                            android:visibility="gone" />
 
                         <Button
-                            android:id="@+id/buttonPanggil"
+                            android:id="@+id/btnPanggil"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_alignParentBottom="true"
+                            android:layout_marginHorizontal="@dimen/margin_edit_text"
                             android:layout_marginTop="@dimen/margin_edit_text"
+                            android:layout_marginBottom="@dimen/margin_edit_text"
                             android:background="@drawable/btn_bg_white_rounded"
-                            android:foreground="?android:attr/selectableItemBackground"
                             android:clickable="true"
                             android:focusable="true"
+                            android:foreground="?android:attr/selectableItemBackground"
                             android:text="Panggil"
-                            android:layout_marginBottom="@dimen/margin_edit_text"
-                            android:layout_marginHorizontal="@dimen/margin_edit_text"
-                            android:visibility="gone"/>
+                            android:visibility="gone" />
 
                         <Button
-                            android:id="@+id/buttonDaftar"
+                            android:id="@+id/btnDaftar"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_alignParentBottom="true"
+                            android:layout_marginHorizontal="@dimen/margin_edit_text"
                             android:layout_marginTop="@dimen/margin_edit_text"
+                            android:layout_marginBottom="@dimen/margin_edit_text"
                             android:background="@drawable/btn_bg_white_rounded"
-                            android:foreground="?android:attr/selectableItemBackground"
                             android:clickable="true"
                             android:focusable="true"
-                            android:text="Daftar"
-                            android:layout_marginBottom="@dimen/margin_edit_text"
-                            android:layout_marginHorizontal="@dimen/margin_edit_text"
-                            android:visibility="gone"/>
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:text="Ambil Antrian"
+                            android:onClick="onAmbilAnrian"
+                            android:visibility="gone" />
 
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
@@ -190,6 +195,7 @@
                     android:layout_marginTop="@dimen/margin_edit_text"
                     android:elevation="@dimen/cardview_default_elevation"
                     android:padding="@dimen/card_elevation"
+                    android:visibility="gone"
                     app:cardBackgroundColor="@color/white"
                     app:cardCornerRadius="5dp">
 
@@ -198,63 +204,65 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:padding="15dp">
+
                         <TextView
                             android:id="@+id/tvTiketId"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/textDarkSecondary"
-                            android:text="#TKT09">
-                        </TextView>
+                            android:text="#TKT09"
+                            android:textColor="@color/textDarkSecondary"></TextView>
+
                         <TextView
                             android:id="@+id/tvWaktu"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/textDarkSecondary"
-                            android:text="2019-10-20 00:01:05">
-                        </TextView>
+                            android:text="2019-10-20 00:01:05"
+                            android:textColor="@color/textDarkSecondary"></TextView>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:textColor="@color/textDarkSecondary"
+                            android:layout_gravity="center_horizontal"
                             android:text="Tunjukan halaman ini sebagai bukti antrian"
-                            android:layout_gravity="center_horizontal">
-                        </TextView>
+                            android:textColor="@color/textDarkSecondary"></TextView>
 
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="5dp"
-                            android:src="@drawable/dotted"
+                            android:layout_marginTop="@dimen/dimen_20"
                             android:layerType="software"
-                            android:layout_marginTop="@dimen/dimen_20"/>
+                            android:src="@drawable/dotted" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:weightSum="2">
+
                             <LinearLayout
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:orientation="vertical">
+
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
                                     android:gravity="center_horizontal"
                                     android:text="Nomor Antrian"
                                     android:textColor="@color/textDarkDisabled"
-                                    android:textSize="16dp"
-                                    android:layout_gravity="center_horizontal"/>
+                                    android:textSize="16dp" />
+
                                 <TextView
                                     android:id="@+id/tvNomorAntrian"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
                                     android:gravity="center_horizontal"
+                                    android:text="19"
                                     android:textColor="@color/blue"
                                     android:textSize="30dp"
-                                    android:text="19"
-                                    android:textStyle="bold"
-                                    android:layout_gravity="center_horizontal"/>
+                                    android:textStyle="bold" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -262,38 +270,40 @@
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
                                 android:orientation="vertical">
+
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
                                     android:gravity="center_horizontal"
                                     android:text="Menunggu"
                                     android:textColor="@color/textDarkDisabled"
-                                    android:textSize="16dp"
-                                    android:layout_gravity="center_horizontal"/>
+                                    android:textSize="16dp" />
+
                                 <TextView
                                     android:id="@+id/tvMenungguAntrian"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
+                                    android:layout_gravity="center_horizontal"
                                     android:gravity="center_horizontal"
+                                    android:text="1"
                                     android:textColor="@color/textDarkSecondary"
                                     android:textSize="25dp"
-                                    android:text="1"
-                                    android:textStyle="bold"
-                                    android:layout_gravity="center_horizontal"/>
+                                    android:textStyle="bold" />
                             </LinearLayout>
                         </LinearLayout>
+
                         <ImageView
                             android:layout_width="match_parent"
                             android:layout_height="5dp"
-                            android:src="@drawable/dotted"
                             android:layerType="software"
-                            />
+                            android:src="@drawable/dotted" />
 
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical"
-                            android:layout_marginVertical="@dimen/dimen_20">
+                            android:layout_marginVertical="@dimen/dimen_20"
+                            android:orientation="vertical">
 
                             <TextView
                                 android:id="@+id/tvNama"
@@ -302,7 +312,7 @@
                                 android:text="Choirul Arifin"
                                 android:textColor="@color/textDarkSecondary"
                                 android:textSize="25sp"
-                                android:textStyle="bold"/>
+                                android:textStyle="bold" />
 
                             <LinearLayout
                                 android:layout_width="match_parent"
@@ -315,17 +325,16 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:text="Usia"
-                                    android:textColor="@color/textDarkDisabled"
-                                    />
+                                    android:textColor="@color/textDarkDisabled" />
 
                                 <TextView
                                     android:id="@+id/tvBerat"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
+                                    android:layout_marginHorizontal="@dimen/margin_edit_text"
                                     android:layout_weight="2"
                                     android:text=" 89 th"
-                                    android:textColor="@color/textDarkSecondary"
-                                    android:layout_marginHorizontal="@dimen/margin_edit_text"/>
+                                    android:textColor="@color/textDarkSecondary" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -346,10 +355,10 @@
                                     android:id="@+id/tvTanggalLahir"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
+                                    android:layout_marginHorizontal="@dimen/margin_edit_text"
                                     android:layout_weight="2"
                                     android:text="2019-10-20"
-                                    android:textColor="@color/textDarkSecondary"
-                                    android:layout_marginHorizontal="@dimen/margin_edit_text"/>
+                                    android:textColor="@color/textDarkSecondary" />
                             </LinearLayout>
 
                             <LinearLayout
@@ -363,20 +372,31 @@
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
                                     android:text="Alamat"
-                                    android:textColor="@color/textDarkDisabled"
-                                   />
+                                    android:textColor="@color/textDarkDisabled" />
 
                                 <TextView
                                     android:id="@+id/tvAlamat"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
+                                    android:layout_marginHorizontal="@dimen/margin_edit_text"
                                     android:layout_weight="2"
                                     android:text="Jl Soekarna-haatta no 530 Bandung"
-                                    android:textColor="@color/textDarkSecondary"
 
-                                    android:layout_marginHorizontal="@dimen/margin_edit_text"/>
+                                    android:textColor="@color/textDarkSecondary" />
                             </LinearLayout>
 
+                            <ImageView
+                                android:layout_width="match_parent"
+                                android:layout_height="5dp"
+                                android:layout_marginTop="@dimen/dimen_20"
+                                android:layerType="software"
+                                android:src="@drawable/dotted" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Jika nomor antrian anda terlambat mohon mengambil nomor antrian baru"
+                                android:textColor="@color/textDarkSecondary"></TextView>
 
                         </LinearLayout>
 
@@ -385,11 +405,211 @@
 
                 </androidx.cardview.widget.CardView>
 
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cvDaftar"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_edit_text"
+                    android:elevation="@dimen/cardview_default_elevation"
+                    android:padding="@dimen/card_elevation"
+                    android:visibility="gone"
+                    app:cardBackgroundColor="@color/white"
+                    app:cardCornerRadius="5dp">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:padding="20dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_edit_text"
+                            android:layout_marginRight="@dimen/margin_edit_text"
+                            android:text="Nama"
+                            android:textColor="@color/textDarkSecondary" />
+
+                        <EditText
+                            android:id="@+id/etNama"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_white_stroke"
+                            android:focusable="true"
+                            android:hint="Nama"
+                            android:inputType="textPersonName"
+                            android:textColor="@color/textDarkPrimary"
+                            android:textColorHint="@color/textDarkDisabled">
+
+                            <requestFocus />
+                        </EditText>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_edit_text"
+                            android:layout_marginRight="@dimen/margin_edit_text"
+                            android:text="Tanggal Lahir"
+                            android:textColor="@color/textDarkSecondary" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:background="@drawable/bg_white_stroke"
+                            android:orientation="horizontal"
+                            android:padding="5dp">
+
+                            <EditText
+                                android:id="@+id/etTangalLahir"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.9"
+                                android:background="@drawable/bg_white_rounded"
+                                android:focusable="false"
+                                android:hint="Tanggal Lahir"
+                                android:inputType="datetime"
+                                android:textColor="@color/textDarkPrimary"
+                                android:textColorHint="@color/textDarkDisabled" />
+
+                            <ImageView
+                                android:layout_width="40dp"
+                                android:layout_height="40dp"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="0.1"
+                                android:onClick="onOpenDatePIcker"
+                                android:src="@drawable/ic_event_note_black_24dp" />
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_edit_text"
+                            android:layout_marginRight="@dimen/margin_edit_text"
+                            android:text="Usia"
+                            android:textColor="@color/textDarkSecondary" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:background="@drawable/bg_white_stroke"
+                            android:orientation="horizontal"
+                            android:padding="5dp">
+
+                            <EditText
+                                android:id="@+id/etUsia"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1.6"
+                                android:background="@drawable/bg_white_rounded"
+                                android:hint="Usia"
+                                android:inputType="number"
+                                android:textColor="@color/textDarkPrimary"
+                                android:textColorHint="@color/textDarkDisabled" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginRight="@dimen/margin_edit_text"
+                                android:text="Th"
+                                android:textColor="@color/textDarkPrimary">
+
+                            </TextView>
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_edit_text"
+                            android:layout_marginRight="@dimen/margin_edit_text"
+                            android:text="Jenis Kelamin"
+                            android:textColor="@color/textDarkSecondary" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="2"
+                            android:background="@drawable/bg_white_stroke"
+                            android:orientation="vertical"
+                            android:padding="10dp">
+
+                            <RadioGroup
+                                android:id="@+id/rgJenisKelamin"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent">
+
+                                <RadioButton
+                                    android:id="@+id/rbLaki"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:checked="true"
+                                    android:text="Laki-laki"
+                                    android:textColor="@color/textDarkPrimary" />
+
+                                <RadioButton
+                                    android:id="@+id/rbPerempuan"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Perempuan"
+                                    android:textColor="@color/textDarkPrimary" />
+                            </RadioGroup>
+                        </LinearLayout>
+
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_edit_text"
+                            android:layout_marginRight="@dimen/margin_edit_text"
+                            android:text="Alamat"
+                            android:textColor="@color/textDarkSecondary" />
+
+                        <EditText
+                            android:id="@+id/etAlamat"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/bg_white_stroke"
+                            android:gravity="top|left"
+                            android:hint="Alamat"
+                            android:inputType="textMultiLine"
+                            android:lines="8"
+                            android:maxLines="10"
+                            android:minLines="6"
+                            android:padding="@dimen/margin_edit_text"
+                            android:scrollbars="vertical"
+                            android:textColor="@color/textDarkPrimary"
+                            android:textColorHint="@color/textDarkDisabled" />
+
+                        <ProgressBar
+                            android:id="@+id/pbDaftar"
+                            style="?android:attr/progressBarStyle"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginVertical="@dimen/margin_edit_text"
+                            android:visibility="gone" />
+
+                        <Button
+                            android:id="@+id/button"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_edit_text"
+                            android:background="@drawable/btn_bg_white_rounded"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:foreground="?android:attr/selectableItemBackground"
+                            android:onClick="onDaftar"
+                            android:text="Simpan" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+
+
             </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
-
 
 
 </RelativeLayout>

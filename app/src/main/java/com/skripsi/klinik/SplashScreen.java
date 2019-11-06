@@ -1,12 +1,12 @@
 package com.skripsi.klinik;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class SplashScreen extends AppCompatActivity {
     SharedData sharedData;
@@ -26,6 +26,7 @@ public class SplashScreen extends AppCompatActivity {
             public void run() {
                 finish();
                 if(id.isEmpty()){
+                //if(true){
                     startActivity(new Intent(SplashScreen.this,MainActivity.class));
                 }else{
                     startActivity(new Intent(SplashScreen.this,DashboardActivity.class));

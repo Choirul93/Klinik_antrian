@@ -1,7 +1,4 @@
 package com.skripsi.klinik;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
-
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -11,9 +8,26 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.HashMap;
 import java.util.Locale;
+import java.util.Map;
 
 public class DaftarActivity extends AppCompatActivity {
     private Toolbar toolbar;
@@ -21,11 +35,13 @@ public class DaftarActivity extends AppCompatActivity {
     private ProgressBar pbDaftar;
     private RadioGroup rgJenisKelamin;
     private RadioButton rbJenisKelamin;
+    private RequestQueue queue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_daftar);
+        queue = Volley.newRequestQueue(this);
         initUI();
     }
 
@@ -75,13 +91,13 @@ public class DaftarActivity extends AppCompatActivity {
             return;
         }
 
-        if(etTangalLahir.getText().toString().isEmpty()){
-            etTangalLahir.setError("Tanggal lahir belum diisi");
-            etTangalLahir.requestFocus();
-            return;
-        }
+//        if(etTangalLahir.getText().toString().isEmpty()){
+//            etTangalLahir.setError("Tanggal lahir belum diisi");
+//            etTangalLahir.requestFocus();
+//            return;
+//        }
 
-        pbDaftar.setVisibility(View.VISIBLE);
+        progresDialog(false,"");
 
         String nama, nomor_hp, tanggal_lahir, alamat, jenis_kelamin;
         int usia = 0;
@@ -100,6 +116,8 @@ public class DaftarActivity extends AppCompatActivity {
 
         if(!etUsia.getText().toString().isEmpty()) usia = Integer.getInteger(etUsia.getText().toString());
         if(!etBerat.getText().toString().isEmpty()) berat = Double.valueOf(etBerat.getText().toString());
+
+        daftar(nama,nomor_hp);
 
     }
 
@@ -137,5 +155,56 @@ public class DaftarActivity extends AppCompatActivity {
             etTangalLahir.setText(sdf.format(myCalendar.getTime()));
         }
     };
+
+    void daftar(final String nama, final String nomor_handphone){
+        final StringRequest stringRequest = new StringRequest(Request.Method.POST, Api.USER,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String Response) {
+                        
+                        try{
+                            JSONObject jsonObject = new JSONObject(Response);
+                            int status = jsonObject.getInt("status");
+                            if(status==1){
+                                finish();
+                            } else{
+                                progresDialog(true,jsonObject.getString("message"));
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            progresDialog(true,e.getMessage());
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError e) {
+                        e.printStackTrace();
+                        progresDialog(true,e.getMessage());
+                    }
+                })
+        {
+            @Override
+            public Map<String, String> getParams(){
+                Map<String, String> params = new HashMap<>();
+                params.put("nama", nama);
+                params.put("nomor_hp", nomor_handphone);
+                params.put("function", "create");
+                return params;
+            }
+        };
+        queue.add(stringRequest);
+    }
+
+    private void progresDialog(boolean isShowToast, String err){
+        if (pbDaftar != null && pbDaftar.isShown()){
+            pbDaftar.setVisibility(View.GONE);
+            if(isShowToast)Toast.makeText(DaftarActivity.this,err,Toast.LENGTH_LONG).show();
+        }
+
+        else if(pbDaftar != null ){
+            pbDaftar.setVisibility(View.VISIBLE);
+        }
+    }
 
 }

@@ -117,7 +117,6 @@ public class MainActivity extends AppCompatActivity {
                             Log.w(TAG, "getInstanceId failed", task.getException());
                             return;
                         }
-
                         token = task.getResult().getToken();
                         Log.d(TAG, token);
                         Toast.makeText(MainActivity.this, token, Toast.LENGTH_SHORT).show();
