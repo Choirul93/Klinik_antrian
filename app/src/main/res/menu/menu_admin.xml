@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/buka"
+        app:showAsAction="never"
+        android:title="Mulai antrian">
+    </item>
+
+    <item
+        android:id="@+id/tutup"
+        app:showAsAction="never"
+        android:title="Tutup antrian">
+    </item>
+
+    <item
+        android:id="@+id/Selesai"
+        app:showAsAction="never"
+        android:title="Selesai antrian">
+    </item>
+
+    <item
+        android:id="@+id/logout_admin"
+        app:showAsAction="never"
+        android:title="Logout">
+    </item>
+</menu>

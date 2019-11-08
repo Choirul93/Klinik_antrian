@@ -4,7 +4,25 @@ public class Antrian {
     private String key;
     private int antrian_sekarang;
     private int jumlah_antrian;
-    private int isOpen;
+    private int header_id;
+    private String tanggal;
+    private int is_open;
+
+    public String getKey() {
+        return key;
+    }
+
+    public void setKey(String key) {
+        this.key = key;
+    }
+
+    public int getIs_open() {
+        return is_open;
+    }
+
+    public void setIs_open(int is_open) {
+        this.is_open = is_open;
+    }
 
     public Antrian() {
     }
@@ -30,11 +48,19 @@ public class Antrian {
         this.jumlah_antrian = jumlah_antrian;
     }
 
-    public int getIsOpen() {
-        return isOpen;
+    public int getHeader_id() {
+        return header_id;
     }
 
-    public void setIsOpen(int isOpen) {
-        this.isOpen = isOpen;
+    public void setHeader_id(int header_id) {
+        this.header_id = header_id;
+    }
+
+    public String getTanggal() {
+        return tanggal;
+    }
+
+    public void setTanggal(String tanggal) {
+        this.tanggal = tanggal;
     }
 }

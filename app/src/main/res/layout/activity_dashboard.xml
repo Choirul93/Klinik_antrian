@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/background"
-    tools:context=".DashboardActivity">
+    tools:context=".DashboardActivity"
+    android:focusableInTouchMode="true">
 
     <androidx.appcompat.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -13,12 +14,12 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="@color/colorPrimary"
-        app:contentInsetLeft="0dp"
+        app:contentInsetLeft="20dp"
         app:contentInsetStart="0dp"
         app:contentInsetStartWithNavigation="0dp"
-        app:navigationIcon="@drawable/ic_view_headline_white_24dp"
         app:title="@string/app_name"
-        app:titleTextColor="@color/white">
+        app:titleTextColor="@color/white"
+        app:titleMarginStart="@dimen/margin_edit_text">
 
     </androidx.appcompat.widget.Toolbar>
 
@@ -51,12 +52,32 @@
                     android:padding="@dimen/card_elevation"
                     app:cardBackgroundColor="@color/white"
                     app:cardCornerRadius="5dp">
+                    <com.facebook.shimmer.ShimmerFrameLayout
+                        android:id="@+id/shimmer_layout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:orientation="vertical"
+                        >
 
+
+
+                    </com.facebook.shimmer.ShimmerFrameLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:orientation="vertical"
                         android:padding="10dp">
+                        <TextView
+                            android:id="@+id/tvTanggalAntrian"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text=""
+                            android:visibility="visible"
+                            android:textColor="@color/textDarkSecondary"
+                            android:gravity="center_horizontal"
+                            android:layout_marginBottom="@dimen/margin_edit_text">
+                        </TextView>
 
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -85,7 +106,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_horizontal"
                                     android:gravity="center"
-                                    android:text=""
+                                    android:text="0"
                                     android:textColor="@color/textDarkSecondary"
                                     android:textSize="30dp" />
                             </LinearLayout>
@@ -113,7 +134,7 @@
                                     android:layout_gravity="center_horizontal"
                                     android:layout_weight="1"
                                     android:gravity="center"
-                                    android:text=""
+                                    android:text="0"
                                     android:textColor="@color/textDarkPrimary"
                                     android:textSize="50dp" />
                             </LinearLayout>
@@ -141,11 +162,23 @@
                                     android:layout_gravity="center_horizontal"
                                     android:layout_weight="1"
                                     android:gravity="center"
-                                    android:text=""
+                                    android:text="0"
                                     android:textColor="@color/textDarkSecondary"
                                     android:textSize="30sp" />
                             </LinearLayout>
                         </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tvAntrianTutup"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_horizontal"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="*Antrian Sudah ditutup"
+                            android:textColor="@color/red"
+                            android:textSize="16dp"
+                            android:visibility="gone"/>
 
                         <ProgressBar
                             android:id="@+id/progressBar"
@@ -164,7 +197,6 @@
                             android:layout_marginBottom="@dimen/margin_edit_text"
                             android:background="@drawable/btn_bg_white_rounded"
                             android:clickable="true"
-                            android:focusable="true"
                             android:foreground="?android:attr/selectableItemBackground"
                             android:text="Panggil"
                             android:visibility="gone" />
@@ -179,13 +211,14 @@
                             android:layout_marginBottom="@dimen/margin_edit_text"
                             android:background="@drawable/btn_bg_white_rounded"
                             android:clickable="true"
-                            android:focusable="true"
                             android:foreground="?android:attr/selectableItemBackground"
                             android:text="Ambil Antrian"
                             android:onClick="onAmbilAnrian"
                             android:visibility="gone" />
 
                     </LinearLayout>
+
+
                 </androidx.cardview.widget.CardView>
 
                 <androidx.cardview.widget.CardView
@@ -209,14 +242,14 @@
                             android:id="@+id/tvTiketId"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="#TKT09"
+                            android:text=""
                             android:textColor="@color/textDarkSecondary"></TextView>
 
                         <TextView
                             android:id="@+id/tvWaktu"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="2019-10-20 00:01:05"
+                            android:text=""
                             android:textColor="@color/textDarkSecondary"></TextView>
 
                         <TextView
@@ -259,7 +292,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_horizontal"
                                     android:gravity="center_horizontal"
-                                    android:text="19"
+                                    android:text=""
                                     android:textColor="@color/blue"
                                     android:textSize="30dp"
                                     android:textStyle="bold" />
@@ -286,7 +319,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center_horizontal"
                                     android:gravity="center_horizontal"
-                                    android:text="1"
+                                    android:text=""
                                     android:textColor="@color/textDarkSecondary"
                                     android:textSize="25dp"
                                     android:textStyle="bold" />
@@ -309,7 +342,7 @@
                                 android:id="@+id/tvNama"
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Choirul Arifin"
+                                android:text=""
                                 android:textColor="@color/textDarkSecondary"
                                 android:textSize="25sp"
                                 android:textStyle="bold" />
@@ -328,12 +361,12 @@
                                     android:textColor="@color/textDarkDisabled" />
 
                                 <TextView
-                                    android:id="@+id/tvBerat"
+                                    android:id="@+id/tvUsia"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_marginHorizontal="@dimen/margin_edit_text"
                                     android:layout_weight="2"
-                                    android:text=" 89 th"
+                                    android:text=""
                                     android:textColor="@color/textDarkSecondary" />
                             </LinearLayout>
 
@@ -357,7 +390,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginHorizontal="@dimen/margin_edit_text"
                                     android:layout_weight="2"
-                                    android:text="2019-10-20"
+                                    android:text=""
                                     android:textColor="@color/textDarkSecondary" />
                             </LinearLayout>
 
@@ -380,7 +413,7 @@
                                     android:layout_height="wrap_content"
                                     android:layout_marginHorizontal="@dimen/margin_edit_text"
                                     android:layout_weight="2"
-                                    android:text="Jl Soekarna-haatta no 530 Bandung"
+                                    android:text=""
 
                                     android:textColor="@color/textDarkSecondary" />
                             </LinearLayout>
@@ -395,7 +428,7 @@
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:text="Jika nomor antrian anda terlambat mohon mengambil nomor antrian baru"
+                                android:text="*Jika nomor antrian anda terlambat mohon mengambil nomor antrian baru"
                                 android:textColor="@color/textDarkSecondary"></TextView>
 
                         </LinearLayout>
@@ -435,13 +468,10 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/bg_white_stroke"
-                            android:focusable="true"
                             android:hint="Nama"
                             android:inputType="textPersonName"
                             android:textColor="@color/textDarkPrimary"
                             android:textColorHint="@color/textDarkDisabled">
-
-                            <requestFocus />
                         </EditText>
 
                         <TextView
@@ -598,12 +628,51 @@
                             android:layout_marginTop="@dimen/margin_edit_text"
                             android:background="@drawable/btn_bg_white_rounded"
                             android:clickable="true"
-                            android:focusable="true"
                             android:foreground="?android:attr/selectableItemBackground"
                             android:onClick="onDaftar"
                             android:text="Simpan" />
                     </LinearLayout>
                 </androidx.cardview.widget.CardView>
+
+                <LinearLayout
+                    android:id="@+id/llNoConection"
+                    android:layout_marginTop="@dimen/margin_edit_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    >
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_gravity="center_horizontal">
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:src="@drawable/ic_info_outline_black_24dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Tidak ada koneksi internet atau server anda down"
+                            android:textColor="@color/textDarkPrimary"
+                            android:layout_marginLeft="@dimen/margin_edit_text"
+                            android:layout_gravity="center_vertical">
+                        </TextView>
+
+                    </LinearLayout>
+
+                    <Button
+                        android:layout_width="100dp"
+                        android:layout_height="wrap_content"
+                        android:text="COBA LAGI"
+                        android:onClick="onReSync"
+                        android:layout_gravity="center_horizontal"
+                        android:background="@color/textDarkDisabled">
+                    </Button>
+
+                </LinearLayout>
 
 
             </LinearLayout>

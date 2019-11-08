@@ -159,7 +159,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
      * @param messageBody FCM message body received.
      */
     private void sendNotification(String Tittle, String messageBody) {
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, SplashScreen.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(getApplicationContext(), 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);

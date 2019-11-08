@@ -15,4 +15,5 @@
     <color name="white">#FFFFFF</color> <!--61 for %38 opacity-->
 
     <color name="blue">#2572E8</color>
+    <color name="red">#F86964</color>
 </resources>
