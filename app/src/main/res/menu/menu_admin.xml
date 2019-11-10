@@ -2,7 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:id="@+id/buka"
+        android:id="@+id/mulai"
         app:showAsAction="never"
         android:title="Mulai antrian">
     </item>
@@ -13,11 +13,11 @@
         android:title="Tutup antrian">
     </item>
 
-    <item
-        android:id="@+id/Selesai"
-        app:showAsAction="never"
-        android:title="Selesai antrian">
-    </item>
+<!--    <item-->
+<!--        android:id="@+id/selesai"-->
+<!--        app:showAsAction="never"-->
+<!--        android:title="Selesai antrian">-->
+<!--    </item>-->
 
     <item
         android:id="@+id/logout_admin"

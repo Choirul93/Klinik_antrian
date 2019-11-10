@@ -1,5 +1,6 @@
 package com.skripsi.klinik;
 
+import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.util.Log;
@@ -42,6 +43,7 @@ import org.json.JSONObject;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
@@ -63,7 +65,7 @@ public class DashboardActivity extends AppCompatActivity {
     DatabaseReference myRef;
     private static String TAG = DashboardActivity.class.getSimpleName();
     int menunggu = 0;
-    int nomor_antrian ;
+    int nomor_antrian=0;
     SharedData sharedData;
     private RequestQueue queue;
     Antrian antrian = new Antrian();
@@ -104,15 +106,19 @@ public class DashboardActivity extends AppCompatActivity {
             case R.id.logout_admin:
                 logout();
                 return true;
+            case R.id.mulai:
+                headerAntrianCreate(sharedData.getString(SharedData.ID));
+                return true;
+            case R.id.tutup:
+                headerAntrianUpdateStatus("0");
+                return true;
             default:
                 return super.onOptionsItemSelected(item);
         }
     }
 
     void initUI(){
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        // Sets the Toolbar to act as the ActionBar for this Activity window.
-        // Make sure the toolbar exists in the activity and is not null
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         tvAntrian = findViewById(R.id.tvAntrian);
@@ -194,6 +200,7 @@ public class DashboardActivity extends AppCompatActivity {
         tvAntrianTutup.setVisibility(View.GONE);
         if(sharedData.getString(SharedData.ISADMIN).equals("1")){
             btnPanggil.setVisibility(View.VISIBLE);
+            if(antrian.getAntrian_sekarang()==antrian.getJumlah_antrian()) btnPanggil.setVisibility(View.GONE);
         } else{
             btnDaftar.setVisibility(View.VISIBLE);
         }
@@ -207,13 +214,15 @@ public class DashboardActivity extends AppCompatActivity {
             cvDaftar.setVisibility(View.GONE);
         } else{
             btnPanggil.setVisibility(View.VISIBLE);
+            if(antrian.getAntrian_sekarang()==antrian.getJumlah_antrian()) btnPanggil.setVisibility(View.GONE);
         }
     }
 
     public void onAmbilAnrian(View view) {
         cvDaftar.setVisibility(View.VISIBLE);
         cvNomorAntrian.setVisibility(View.GONE);
-        etNama.requestFocus();
+        progressBar.setVisibility(View.GONE);
+
     }
 
     public void onSimpan() {
@@ -337,28 +346,47 @@ public class DashboardActivity extends AppCompatActivity {
         }
     }
 
+    @SuppressLint("ResourceAsColor")
     void updateUIHeaderAntrian(){
-        shimmer_layout.stopShimmer();
-        tvTanggalAntrian.setText(antrian.getTanggal());
-        tvAntrian.setText(String.valueOf(antrian.getAntrian_sekarang()));
-        tvJumlahAntrian.setText(String.valueOf(antrian.getJumlah_antrian()));
-        tvMenunggu.setText(String.valueOf(antrian.getJumlah_antrian()-antrian.getAntrian_sekarang()));
-        tvNomorAntrian.setText(String.valueOf(nomor_antrian));
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+        String[] datetime = formatter.format(date).split(" ");
+        String tanggal = datetime[0];
+        String[] tanggalCreate = antrian.getTanggal().split(" ");
+        String tanggal_antrian = tanggalCreate[0];
+        if(tanggal.contains(tanggal_antrian)){
+            tvTanggalAntrian.setTextColor(getResources().getColor(R.color.textDarkPrimary));
+            System.out.println(formatter.format(date));
+            shimmer_layout.stopShimmer();
+            tvTanggalAntrian.setText(antrian.getTanggal());
+            tvAntrian.setText(String.valueOf(antrian.getAntrian_sekarang()));
+            tvJumlahAntrian.setText(String.valueOf(antrian.getJumlah_antrian()));
+            tvMenunggu.setText(String.valueOf(antrian.getJumlah_antrian()-antrian.getAntrian_sekarang()));
+            tvNomorAntrian.setText(String.valueOf(nomor_antrian));
 
-        if(nomor_antrian-antrian.getAntrian_sekarang()<0){
-            tvMenungguAntrian.setText("selesai");
-        } else{
-            tvMenungguAntrian.setText(String.valueOf(nomor_antrian-antrian.getAntrian_sekarang()));
+            if(nomor_antrian-antrian.getAntrian_sekarang()<0){
+                tvMenungguAntrian.setText("selesai");
+            } else{
+                tvMenungguAntrian.setText(String.valueOf(nomor_antrian-antrian.getAntrian_sekarang()));
+            }
+
+            if(antrian.getIs_open()==1)
+                showButton() ;
+            else{
+                hideButton();
+            }
+            if(nomor_antrian==0){
+                getAntrianSekarang("admin",String.valueOf(antrian.getAntrian_sekarang()));
+            }
         }
-        Log.i(TAG, "onDataChange: antrian.getIsOpen() ===>"+antrian.getIs_open());
-        Log.i(TAG, "onDataChange: antrian.getheader ===>"+antrian.getHeader_id());
-
-        if(antrian.getIs_open()==1)
-            showButton() ;
         else{
-            hideButton();
-
+            tvTanggalAntrian.setTextColor(getResources().getColor(R.color.red));
+            tvTanggalAntrian.setText("Maaf antrian belum di buka :)");
+            tvAntrian.setText("0");
+            tvJumlahAntrian.setText("0");
+            tvMenunggu.setText("0");
         }
+
     }
     
     void fillCvAntrian(JSONObject jsonObject) throws JSONException {
@@ -374,14 +402,15 @@ public class DashboardActivity extends AppCompatActivity {
         tvNama.setText(data.getString("nama"));
         tvNomorAntrian.setText(data.getString("nomor_antrian"));
         nomor_antrian = Integer.valueOf(data.getString("nomor_antrian"));
-        if(antrian.getAntrian_sekarang()>0){
-            int menunggu = nomor_antrian-antrian.getAntrian_sekarang();
-            if(menunggu>0){
-                tvMenungguAntrian.setText(String.valueOf(menunggu));
-            } else{
-                tvMenungguAntrian.setText("Antrian selesai");
-            }
+        int menunggu = nomor_antrian-antrian.getAntrian_sekarang();
+        if(menunggu>0){
+            tvMenungguAntrian.setText(String.valueOf(menunggu));
+        } else if(menunggu==0){
+            tvMenungguAntrian.setText("Dipanggil");
+        } else{
+            tvMenungguAntrian.setText("Selesai");
         }
+
     }
 
     void getAntrianSekarang(final String type, final String generic){
@@ -428,6 +457,129 @@ public class DashboardActivity extends AppCompatActivity {
 
     }
 
+    void nextAntrian(final String nomor, final String status){
+        final StringRequest antrianSekarang = new StringRequest(Request.Method.POST, Api.ANTRIAN,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String Response) {
+                        Log.i(TAG, "onResponse: ===>"+Response);
+                        try{
+                            JSONObject jsonObject = new JSONObject(Response);
+                            int status = jsonObject.getInt("status");
+                            if(status==1 && jsonObject.getJSONArray("data") != null){
+                                fillCvAntrian(jsonObject);
+                                llNoConection.setVisibility(View.GONE);
+                                cvDaftar.setVisibility(View.GONE);
+                                cvNomorAntrian.setVisibility(View.VISIBLE);
+                            } else{
+                                Toast.makeText(DashboardActivity.this,"Antrian Selesai",Toast.LENGTH_LONG).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            progresDialog(true,e.getMessage());
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError e) {
+                        e.printStackTrace();
+                        Toast.makeText(DashboardActivity.this,e.getMessage(),Toast.LENGTH_LONG).show();
+                        llNoConection.setVisibility(View.VISIBLE);
+                    }
+                })
+        {
+            @Override
+            public Map<String, String> getParams(){
+                Map<String, String> params = new HashMap<>();
+                params.put("nomor",nomor);
+                params.put("status",status);
+                params.put("function", "antrianNext");
+                return params;
+            }
+        };
+        queue.add(antrianSekarang);
+
+    }
+
+    void headerAntrianCreate(final String user_id){
+        final StringRequest antrianSekarang = new StringRequest(Request.Method.POST, Api.HEADERANTRIAN,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String Response) {
+                        Log.i(TAG, "onResponse: ===>"+Response);
+                        try{
+                            JSONObject jsonObject = new JSONObject(Response);
+                            int status = jsonObject.getInt("status");
+                            if(status==1 && jsonObject.getJSONArray("data") != null){
+                                fillCvAntrian(jsonObject);
+                                llNoConection.setVisibility(View.GONE);
+                            } else{
+                                Toast.makeText(DashboardActivity.this,"Antrian sudah dibuat",Toast.LENGTH_LONG).show();
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            progresDialog(true,e.getMessage());
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError e) {
+                        e.printStackTrace();
+                        Toast.makeText(DashboardActivity.this,e.getMessage(),Toast.LENGTH_LONG).show();
+                    }
+                })
+        {
+            @Override
+            public Map<String, String> getParams(){
+                Map<String, String> params = new HashMap<>();
+                params.put("user_id",user_id);
+                params.put("function", "create");
+                return params;
+            }
+        };
+        queue.add(antrianSekarang);
+
+    }
+
+    void headerAntrianUpdateStatus(final String status ){
+        final StringRequest antrianSekarang = new StringRequest(Request.Method.POST, Api.HEADERANTRIAN,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String Response) {
+                        Log.i(TAG, " headerAntrianUpdateStatus onResponse: "+Response);
+                        try{
+                            JSONObject jsonObject = new JSONObject(Response);
+                            Toast.makeText(DashboardActivity.this,"Berhasil menutup antrian",Toast.LENGTH_LONG).show();
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                            progresDialog(true,e.getMessage());
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError e) {
+                        e.printStackTrace();
+                        Toast.makeText(DashboardActivity.this,e.getMessage(),Toast.LENGTH_LONG).show();
+                    }
+                })
+        {
+            @Override
+            public Map<String, String> getParams(){
+                Map<String, String> params = new HashMap<>();
+                params.put("is_open",status);
+                params.put("function", "updateStatus");
+                return params;
+            }
+        };
+        queue.add(antrianSekarang);
+
+    }
+
+
+
     public void onReSync(View view) {
         if(sharedData.getString(SharedData.ISADMIN).equals("1")){
             if(antrian.getAntrian_sekarang() != 0){
@@ -444,4 +596,7 @@ public class DashboardActivity extends AppCompatActivity {
     }
 
 
+    public void onPanggil(View view) {
+        nextAntrian(String.valueOf(antrian.getAntrian_sekarang()),"0");
+    }
 }

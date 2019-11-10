@@ -199,7 +199,8 @@
                             android:clickable="true"
                             android:foreground="?android:attr/selectableItemBackground"
                             android:text="Panggil"
-                            android:visibility="gone" />
+                            android:visibility="gone"
+                            android:onClick="onPanggil"/>
 
                         <Button
                             android:id="@+id/btnDaftar"

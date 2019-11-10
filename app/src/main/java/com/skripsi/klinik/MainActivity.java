@@ -221,6 +221,8 @@ public class MainActivity extends AppCompatActivity {
         sharedData.putString(SharedData.ID,jsonData.getString("id"));
         sharedData.putString(SharedData.NAMA,jsonData.getString("nama"));
         sharedData.putString(SharedData.ISADMIN,jsonData.getString("isAdmin"));
+        progresDialog(false,"");
+        finish();
         startActivity(new Intent(this,DashboardActivity.class));
     }
 
