@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -168,11 +169,11 @@ public class DaftarActivity extends AppCompatActivity {
                             if(status==1){
                                 finish();
                             } else{
-                                progresDialog(true,jsonObject.getString("message"));
+                                progresDialog(true,"Tidak dapat mmebuat akunn");
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            progresDialog(true,e.getMessage());
+                            progresDialog(true,"Json error");
                         }
                     }
                 },
@@ -180,7 +181,7 @@ public class DaftarActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError e) {
                         e.printStackTrace();
-                        progresDialog(true,e.getMessage());
+                        progresDialog(true,e.toString());
                     }
                 })
         {
@@ -193,6 +194,9 @@ public class DaftarActivity extends AppCompatActivity {
                 return params;
             }
         };
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(Api.RTO,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         queue.add(stringRequest);
     }
 

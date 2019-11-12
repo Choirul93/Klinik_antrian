@@ -1,6 +1,5 @@
 package com.skripsi.klinik;
 
-import android.annotation.SuppressLint;
 import android.app.DatePickerDialog;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,6 +22,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.cardview.widget.CardView;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -101,15 +101,18 @@ public class DashboardActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.logout_user:
+
                 logout();
                 return true;
             case R.id.logout_admin:
                 logout();
                 return true;
             case R.id.mulai:
+                progressBar.setVisibility(View.VISIBLE);
                 headerAntrianCreate(sharedData.getString(SharedData.ID));
                 return true;
             case R.id.tutup:
+                progressBar.setVisibility(View.VISIBLE);
                 headerAntrianUpdateStatus("0");
                 return true;
             default:
@@ -222,6 +225,7 @@ public class DashboardActivity extends AppCompatActivity {
         cvDaftar.setVisibility(View.VISIBLE);
         cvNomorAntrian.setVisibility(View.GONE);
         progressBar.setVisibility(View.GONE);
+        pbDaftar.setVisibility(View.GONE);
 
     }
 
@@ -258,7 +262,7 @@ public class DashboardActivity extends AppCompatActivity {
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String Response) {
-                        Log.i(TAG, "onResponse: ===>"+Response);
+                        Log.i(TAG, " onSimpan onResponse: ===>"+Response);
                         try{
                             JSONObject jsonObject = new JSONObject(Response);
                             int status = jsonObject.getInt("status");
@@ -272,7 +276,7 @@ public class DashboardActivity extends AppCompatActivity {
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            progresDialog(true,e.getMessage());
+                            progresDialog(true,e.toString());
                         }
                     }
                 },
@@ -280,7 +284,7 @@ public class DashboardActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError e) {
                         e.printStackTrace();
-                        progresDialog(true,e.getMessage());
+                        progresDialog(true,e.toString());
                     }
                 })
         {
@@ -299,6 +303,9 @@ public class DashboardActivity extends AppCompatActivity {
                 return params;
             }
         };
+        daftar.setRetryPolicy(new DefaultRetryPolicy(Api.RTO,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         queue.add(daftar);
 
     }
@@ -346,8 +353,8 @@ public class DashboardActivity extends AppCompatActivity {
         }
     }
 
-    @SuppressLint("ResourceAsColor")
     void updateUIHeaderAntrian(){
+        progressBar.setVisibility(View.GONE);
         Date date = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
         String[] datetime = formatter.format(date).split(" ");
@@ -431,7 +438,7 @@ public class DashboardActivity extends AppCompatActivity {
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            progresDialog(true,e.getMessage());
+                            progresDialog(true,e.toString());
                         }
                     }
                 },
@@ -439,7 +446,7 @@ public class DashboardActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError e) {
                         e.printStackTrace();
-                        Toast.makeText(DashboardActivity.this,e.getMessage(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(DashboardActivity.this,e.toString(),Toast.LENGTH_LONG).show();
                         llNoConection.setVisibility(View.VISIBLE);
                     }
                 })
@@ -453,11 +460,15 @@ public class DashboardActivity extends AppCompatActivity {
                 return params;
             }
         };
+        antrianSekarang.setRetryPolicy(new DefaultRetryPolicy(Api.RTO,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         queue.add(antrianSekarang);
 
     }
 
     void nextAntrian(final String nomor, final String status){
+        progressBar.setVisibility(View.VISIBLE);
         final StringRequest antrianSekarang = new StringRequest(Request.Method.POST, Api.ANTRIAN,
                 new Response.Listener<String>() {
                     @Override
@@ -465,6 +476,7 @@ public class DashboardActivity extends AppCompatActivity {
                         Log.i(TAG, "onResponse: ===>"+Response);
                         try{
                             JSONObject jsonObject = new JSONObject(Response);
+                            progressBar.setVisibility(View.GONE);
                             int status = jsonObject.getInt("status");
                             if(status==1 && jsonObject.getJSONArray("data") != null){
                                 fillCvAntrian(jsonObject);
@@ -476,7 +488,7 @@ public class DashboardActivity extends AppCompatActivity {
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            progresDialog(true,e.getMessage());
+                            progresDialog(true,e.toString());
                         }
                     }
                 },
@@ -484,7 +496,7 @@ public class DashboardActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError e) {
                         e.printStackTrace();
-                        Toast.makeText(DashboardActivity.this,e.getMessage(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(DashboardActivity.this,e.toString(),Toast.LENGTH_LONG).show();
                         llNoConection.setVisibility(View.VISIBLE);
                     }
                 })
@@ -498,6 +510,9 @@ public class DashboardActivity extends AppCompatActivity {
                 return params;
             }
         };
+        antrianSekarang.setRetryPolicy(new DefaultRetryPolicy(Api.RTO,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         queue.add(antrianSekarang);
 
     }
@@ -511,6 +526,8 @@ public class DashboardActivity extends AppCompatActivity {
                         try{
                             JSONObject jsonObject = new JSONObject(Response);
                             int status = jsonObject.getInt("status");
+                            progressBar.setVisibility(View.GONE);
+
                             if(status==1 && jsonObject.getJSONArray("data") != null){
                                 fillCvAntrian(jsonObject);
                                 llNoConection.setVisibility(View.GONE);
@@ -519,7 +536,7 @@ public class DashboardActivity extends AppCompatActivity {
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            progresDialog(true,e.getMessage());
+                            progresDialog(true,e.toString());
                         }
                     }
                 },
@@ -527,7 +544,7 @@ public class DashboardActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError e) {
                         e.printStackTrace();
-                        Toast.makeText(DashboardActivity.this,e.getMessage(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(DashboardActivity.this,e.toString(),Toast.LENGTH_LONG).show();
                     }
                 })
         {
@@ -539,6 +556,9 @@ public class DashboardActivity extends AppCompatActivity {
                 return params;
             }
         };
+        antrianSekarang.setRetryPolicy(new DefaultRetryPolicy(Api.RTO,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         queue.add(antrianSekarang);
 
     }
@@ -551,10 +571,11 @@ public class DashboardActivity extends AppCompatActivity {
                         Log.i(TAG, " headerAntrianUpdateStatus onResponse: "+Response);
                         try{
                             JSONObject jsonObject = new JSONObject(Response);
+                            progressBar.setVisibility(View.GONE);
                             Toast.makeText(DashboardActivity.this,"Berhasil menutup antrian",Toast.LENGTH_LONG).show();
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            progresDialog(true,e.getMessage());
+                            progresDialog(true,e.toString());
                         }
                     }
                 },
@@ -562,7 +583,7 @@ public class DashboardActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError e) {
                         e.printStackTrace();
-                        Toast.makeText(DashboardActivity.this,e.getMessage(),Toast.LENGTH_LONG).show();
+                        Toast.makeText(DashboardActivity.this,e.toString(),Toast.LENGTH_LONG).show();
                     }
                 })
         {
@@ -574,6 +595,9 @@ public class DashboardActivity extends AppCompatActivity {
                 return params;
             }
         };
+        antrianSekarang.setRetryPolicy(new DefaultRetryPolicy(Api.RTO,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         queue.add(antrianSekarang);
 
     }

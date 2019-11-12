@@ -6,4 +6,5 @@ public class Api {
     public static String PASIEN = BASE+"pasien.php";
     public static String ANTRIAN = BASE+"antrian.php";
     public static String HEADERANTRIAN = BASE+"headerAntrian.php";
+    public static int RTO = 10000;
 }

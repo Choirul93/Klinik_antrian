@@ -17,6 +17,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -148,7 +149,7 @@ public class MainActivity extends AppCompatActivity {
 
                         } catch (JSONException e) {
                             e.printStackTrace();
-                            progresDialog(true,e.getMessage());
+                            progresDialog(true,e.toString());
                         }
 
                     }
@@ -157,7 +158,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public void onErrorResponse(VolleyError e) {
                     e.printStackTrace();
-                    progresDialog(true,e.getMessage());
+                    progresDialog(true,e.toString());
                 }
             })
             {
@@ -170,6 +171,9 @@ public class MainActivity extends AppCompatActivity {
                     return params;
                 }
             };
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(Api.RTO,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
 
         queue.add(stringRequest);
     }
@@ -190,7 +194,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError e) {
                         e.printStackTrace();
-                        progresDialog(true,e.getMessage());
+                        progresDialog(true,e.toString());
                     }
                 })
         {
@@ -203,7 +207,9 @@ public class MainActivity extends AppCompatActivity {
                 return params;
             }
         };
-        queue.add(stringRequest);
+        stringRequest.setRetryPolicy(new DefaultRetryPolicy(Api.RTO,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
     }
 
     private void progresDialog(boolean isShowToast, String err){
