@@ -184,6 +184,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(String Response) {
                         try {
+                            Log.i(TAG, "onResponse: updateFirebaseToken ==>"+Response);
                             loginSucces();
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -210,6 +211,7 @@ public class MainActivity extends AppCompatActivity {
         stringRequest.setRetryPolicy(new DefaultRetryPolicy(Api.RTO,
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        queue.add(stringRequest);
     }
 
     private void progresDialog(boolean isShowToast, String err){
@@ -227,7 +229,7 @@ public class MainActivity extends AppCompatActivity {
         sharedData.putString(SharedData.ID,jsonData.getString("id"));
         sharedData.putString(SharedData.NAMA,jsonData.getString("nama"));
         sharedData.putString(SharedData.ISADMIN,jsonData.getString("isAdmin"));
-        progresDialog(false,"");
+        //progresDialog(false,"");
         finish();
         startActivity(new Intent(this,DashboardActivity.class));
     }

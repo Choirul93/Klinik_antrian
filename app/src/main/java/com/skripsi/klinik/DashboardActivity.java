@@ -363,7 +363,6 @@ public class DashboardActivity extends AppCompatActivity {
         String tanggal_antrian = tanggalCreate[0];
         if(tanggal.contains(tanggal_antrian)){
             tvTanggalAntrian.setTextColor(getResources().getColor(R.color.textDarkPrimary));
-            System.out.println(formatter.format(date));
             shimmer_layout.stopShimmer();
             tvTanggalAntrian.setText(antrian.getTanggal());
             tvAntrian.setText(String.valueOf(antrian.getAntrian_sekarang()));
